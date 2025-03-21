@@ -1,5 +1,6 @@
 import processing.core.PApplet;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -129,6 +130,27 @@ public final class VirtualWorld extends PApplet {
                 System.out.println(entity.log());
             }
         }
+        System.out.println("Wizard: I HAVE ARRIVED! FEAR MY WRATH. MEOW...");
+        //Wizard wizard = new Wizard(Wizard.WIZARD_KEY, pressed, imageLibrary.get(Wizard.WIZARD_KEY), 0.25,0.5, 0);
+        Raccoon raccoon = new Raccoon(Raccoon.RACCOON_KEY, pressed, imageLibrary.get(Raccoon.RACCOON_KEY), 0.25, 0.5);
+        world.addEntity(raccoon);
+        raccoon.scheduleActions(scheduler, world, imageLibrary);
+         List<Point> adjacentPositions = new ArrayList<>(List.of(
+                new Point(pressed.x - 1, pressed.y),
+                new Point(pressed.x + 1, pressed.y),
+                new Point(pressed.x, pressed.y - 1),
+                new Point(pressed.x, pressed.y + 1),
+                new Point(pressed.x, pressed.y)
+        ));
+
+        for (Point adjacentPosition : adjacentPositions) {
+            if (world.inBounds(adjacentPosition) && world.hasBackground(adjacentPosition)) {
+                Background bg = new Background("yellowroad", imageLibrary.get("yellowroad"), 0);
+                world.setBackgroundCell(adjacentPosition, bg);
+            }
+        }
+
+
     }
 
     /** Converts mouse position to world position. */

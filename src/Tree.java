@@ -43,6 +43,7 @@ public class Tree extends Health implements Transformable {
 
             world.addEntity(stump);
 
+
             return true;
         }
 

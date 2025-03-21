@@ -163,11 +163,17 @@ public class WorldParser {
                 case Dude.DUDE_KEY -> parseDude(specificProperties, id, position, imageLibrary);
                 case Fairy.FAIRY_KEY -> parseFairy(specificProperties, id, position, imageLibrary);
                 case House.HOUSE_KEY -> parseHouse(specificProperties, id, position, imageLibrary);
+                case Hat.HAT_KEY -> parseHat(specificProperties, id, position, imageLibrary);
+                case Castle.CASTLE_KEY -> parseCastle(specificProperties, id, position, imageLibrary);
                 case Mushroom.MUSHROOM_KEY -> parseMushroom(specificProperties, id, position, imageLibrary);
+                case MushroomWizard.MUSHROOM_WIZARD_KEY -> parseMushroomWizard(specificProperties, id, position, imageLibrary);
                 case Water.WATER_KEY -> parseWater(specificProperties, id, position, imageLibrary);
                 case Sapling.SAPLING_KEY -> parseSapling(specificProperties, id, position, imageLibrary);
                 case Stump.STUMP_KEY -> parseStump(specificProperties, position, id, imageLibrary);
                 case Tree.TREE_KEY -> parseTree(specificProperties, id, position, imageLibrary);
+                case Raccoon.RACCOON_KEY -> parseRaccoon(specificProperties, id, position, imageLibrary);
+                case Wizard.WIZARD_KEY -> parseWizard(specificProperties, id, position, imageLibrary);
+                case Alligator.ALLIGATOR_KEY -> parseAlligator(specificProperties, id, position, imageLibrary);
                 default -> throw new IllegalArgumentException(String.format("Unexpected entity key: %s", key));
             };
         } else {
@@ -225,6 +231,99 @@ public class WorldParser {
         }
     }
 
+    private static Entity parseHat(String[] properties, String id, Point position, ImageLibrary imageLibrary) {
+        if (properties.length == Hat.HAT_PARSE_PROPERTY_COUNT) {
+
+            // Modify to use a constructor from your class hierarchy
+            // Ensure the order of all passed arguments match the desired parameters
+            return new Hat(
+                    id,
+                    position,
+                    imageLibrary.get(Hat.HAT_KEY),
+                    Double.parseDouble(properties[Hat.HAT_PARSE_PROPERTY_ANIMATION_PERIOD_INDEX]),
+                    Double.parseDouble(properties[Hat.HAT_PARSE_PROPERTY_BEHAVIOR_PERIOD_INDEX])
+            );
+
+        } else {
+            throw new IllegalArgumentException(String.format(
+                    "%s requires %d properties when parsing, got %d",
+                    Hat.HAT_KEY,
+                    Hat.HAT_PARSE_PROPERTY_COUNT,
+                    properties.length
+            ));
+        }
+    }
+
+    private static Entity parseAlligator(String[] properties, String id, Point position, ImageLibrary imageLibrary) {
+        if (properties.length == Alligator.ALLIGATOR_PARSE_PROPERTY_COUNT) {
+
+            // Modify to use a constructor from your class hierarchy
+            // Ensure the order of all passed arguments match the desired parameters
+            return new Alligator(
+                    id,
+                    position,
+                    imageLibrary.get(Alligator.ALLIGATOR_KEY),
+                    Double.parseDouble(properties[Alligator.ALLIGATOR_PARSE_PROPERTY_ANIMATION_PERIOD_INDEX]),
+                    Double.parseDouble(properties[Alligator.ALLIGATOR_PARSE_PROPERTY_BEHAVIOR_PERIOD_INDEX])
+            );
+
+        } else {
+            throw new IllegalArgumentException(String.format(
+                    "%s requires %d properties when parsing, got %d",
+                    Alligator.ALLIGATOR_KEY,
+                    Alligator.ALLIGATOR_PARSE_PROPERTY_COUNT,
+                    properties.length
+            ));
+        }
+    }
+
+    private static Entity parseWizard(String[] properties, String id, Point position, ImageLibrary imageLibrary) {
+        if (properties.length == Wizard.WIZARD_PARSE_PROPERTY_COUNT) {
+
+            // Modify to use a constructor from your class hierarchy
+            // Ensure the order of all passed arguments match the desired parameters
+            return new Wizard(
+                    id,
+                    position,
+                    imageLibrary.get(Wizard.WIZARD_KEY),
+                    Double.parseDouble(properties[Wizard.WIZARD_PARSE_PROPERTY_ANIMATION_PERIOD_INDEX]),
+                    Double.parseDouble(properties[Wizard.WIZARD_PARSE_PROPERTY_BEHAVIOR_PERIOD_INDEX]),
+                    0
+            );
+
+        } else {
+            throw new IllegalArgumentException(String.format(
+                    "%s requires %d properties when parsing, got %d",
+                    Wizard.WIZARD_KEY,
+                    Wizard.WIZARD_PARSE_PROPERTY_COUNT,
+                    properties.length
+            ));
+        }
+    }
+
+    private static Entity parseRaccoon(String[] properties, String id, Point position, ImageLibrary imageLibrary) {
+        if (properties.length == Raccoon.RACCOON_PARSE_PROPERTY_COUNT) {
+
+            // Modify to use a constructor from your class hierarchy
+            // Ensure the order of all passed arguments match the desired parameters
+            return new Raccoon(
+                    id,
+                    position,
+                    imageLibrary.get(Raccoon.RACCOON_KEY),
+                    Double.parseDouble(properties[Raccoon.RACCOON_PARSE_PROPERTY_ANIMATION_PERIOD_INDEX]),
+                    Double.parseDouble(properties[Raccoon.RACCOON_PARSE_PROPERTY_BEHAVIOR_PERIOD_INDEX])
+            );
+
+        } else {
+            throw new IllegalArgumentException(String.format(
+                    "%s requires %d properties when parsing, got %d",
+                    Raccoon.RACCOON_KEY,
+                    Raccoon.RACCOON_PARSE_PROPERTY_COUNT,
+                    properties.length
+            ));
+        }
+    }
+
     /** Parses a line of Mushroom data. */
     private static Entity parseMushroom(String[] properties, String id, Point position, ImageLibrary imageLibrary) {
         if (properties.length == Mushroom.MUSHROOM_PARSE_PROPERTY_COUNT) {
@@ -248,6 +347,28 @@ public class WorldParser {
         }
     }
 
+    private static Entity parseMushroomWizard(String[] properties, String id, Point position, ImageLibrary imageLibrary) {
+        if (properties.length == MushroomWizard.MUSHROOM_WIZARD_PARSE_PROPERTY_COUNT) {
+
+            // Modify to use a constructor from your class hierarchy
+            // Ensure the order of all passed arguments match the desired parameters
+            return new MushroomWizard(
+                    id,
+                    position,
+                    imageLibrary.get(MushroomWizard.MUSHROOM_WIZARD_KEY),
+                    Double.parseDouble(properties[MushroomWizard.MUSHROOM_WIZARD_PARSE_BEHAVIOR_PERIOD_INDEX])
+            );
+
+        } else {
+            throw new IllegalArgumentException(String.format(
+                    "%s requires %d properties when parsing, got %d",
+                    MushroomWizard.MUSHROOM_WIZARD_KEY,
+                    MushroomWizard.MUSHROOM_WIZARD_PARSE_PROPERTY_COUNT,
+                    properties.length
+            ));
+        }
+    }
+
     /** Parses a line of House data. */
     private static Entity parseHouse(String[] properties, String id, Point position, ImageLibrary imageLibrary) {
         if (properties.length == House.HOUSE_PARSE_PROPERTY_COUNT) {
@@ -265,6 +386,27 @@ public class WorldParser {
                     "%s requires %d properties when parsing, got %d",
                     House.HOUSE_KEY,
                     House.HOUSE_PARSE_PROPERTY_COUNT,
+                    properties.length
+            ));
+        }
+    }
+
+    private static Entity parseCastle(String[] properties, String id, Point position, ImageLibrary imageLibrary) {
+        if (properties.length == Castle.CASTLE_PARSE_PROPERTY_COUNT) {
+
+            // Modify to use a constructor from your class hierarchy
+            // Ensure the order of all passed arguments match the desired parameters
+            return new Castle(
+                    id,
+                    position,
+                    imageLibrary.get(Castle.CASTLE_KEY)
+            );
+
+        } else {
+            throw new IllegalArgumentException(String.format(
+                    "%s requires %d properties when parsing, got %d",
+                    Castle.CASTLE_KEY,
+                    Castle.CASTLE_PARSE_PROPERTY_COUNT,
                     properties.length
             ));
         }

@@ -1,4 +1,3 @@
-import org.junit.rules.Timeout;
 import processing.core.PImage;
 
 import java.util.List;
